@@ -1,0 +1,6 @@
+pyinstaller
+pyarmor
+paramiko
+requests
+pynput
+py7zr
