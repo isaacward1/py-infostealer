@@ -14,17 +14,30 @@ A guide on the build process, obfuscation techniques, and analysis of simple pyt
 
 ## Building Malware
 
-### Code Obfuscation w/ Pyarmor
-[finish later]
+### Code Obfuscation w/ [Pyarmor](https://pypi.org/project/pyarmor/)
+To apply basic code obfuscation:
+> pyarmor gen example.py
 
 <br>
 
-### Script to Executable
+### Using [Pyinstaller](https://pyinstaller.org/en/stable/usage.html)
+Initial building:
+> cd dist
+> pyinstaller example.py
+<br>
+Editing .spec file
+
 [finish later]
+
 
 <br>
 
 ### Other Obfuscation Techniques
+[finish later]
+
+<br>
+
+### Ideas
 [finish later]
 
 <br>
