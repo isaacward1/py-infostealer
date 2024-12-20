@@ -12,7 +12,7 @@ A guide on the build process, obfuscation techniques, and analysis of simple pyt
 
 <br>
 
-## Creating Your Own Malware
+## Building Malware
 [to do later]
 
 <br>
