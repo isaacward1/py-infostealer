@@ -13,7 +13,19 @@ A guide on the build process, obfuscation techniques, and analysis of simple pyt
 <br>
 
 ## Building Malware
-[to do later]
+
+### Code Obfuscation w/ Pyarmor
+[finish later]
+
+<br>
+
+### Script to Executable
+[finish later]
+
+<br>
+
+### Other Obfuscation Techniques
+[finish later]
 
 <br>
 
