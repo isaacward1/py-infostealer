@@ -6,7 +6,7 @@ A guide on the build process, obfuscation techniques, and analysis of simple pyt
 <br>
 
 ## Prerequisites
-- Windows 10/11 VM
+- Windows 10
 - Python 3.1X
 > pip install -U -R requirements.txt
 
