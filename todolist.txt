@@ -1,0 +1,3 @@
+- email capability
+- ssh key integration
+- ssh over tor via sockets
