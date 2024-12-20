@@ -1,3 +1,4 @@
 - email capability
 - ssh key integration
+- grab one time pgp priv key from http server, decrypt password, delete key
 - ssh over tor via sockets
