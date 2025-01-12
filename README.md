@@ -21,11 +21,13 @@ To apply basic code obfuscation:
 <br>
 
 ### Using [Pyinstaller](https://pyinstaller.org/en/stable/usage.html)
-Initial building:
+#### Initial building:
 > cd dist
 > pyinstaller example.py
+
 <br>
-Editing .spec file
+
+#### Editing .spec file
 
 [finish later]
 
