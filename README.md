@@ -51,3 +51,11 @@ executable file. The contents of the pyz file (usually pyc files) present inside
 executable are also extracted and automatically fixed so that a Python bytecode decompiler will recognize it.
 
 [uncompyle6](https://github.com/rocky/python-uncompyle6/) - A cross-version Python bytecode decompiler. Translates Python bytecode back into equivalent Python source code.
+
+<br>
+
+## To-do List
+- smtp exfiltration
+- ssh key integration
+- encrypted ssh password from http server
+- ssh over tor socket
