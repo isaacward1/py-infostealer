@@ -12,47 +12,49 @@ A guide on the build process, obfuscation techniques, and analysis of simple pyt
 
 <br>
 
-## Building Malware
+## Exfiltration Methods
 
-### Code Obfuscation w/ [Pyarmor](https://pypi.org/project/pyarmor/)
+### SSH exfiltration using [Paramiko](https://www.paramiko.org/installing.html)
+The example script shown only uses SSH via the paramiko library to exfiltrate stolen data (for now at least). Below is a snippet of its usage:
+
+
+<br>
+
+### Other Methods ([PyExfil](https://github.com/ytisf/PyExfil))
+...
+
+<br>
+
+## Code Obfuscation Techniques
+### Using [Pyarmor](https://pypi.org/project/pyarmor/)
 To apply basic code obfuscation:
 > pyarmor gen example.py
 
 <br>
 
-### Using [Pyinstaller](https://pyinstaller.org/en/stable/usage.html)
-#### Initial building:
+## Using [Pyinstaller](https://pyinstaller.org/en/stable/usage.html)
+### Initial building:
 > cd dist
 > pyinstaller example.py
 
 <br>
 
-#### Editing .spec file
+### Editing the .spec file
+...
 
-[finish later]
-
-
-<br>
-
-### Other Obfuscation Techniques
-[finish later]
-
-<br>
-
-### Ideas
-[finish later]
 
 <br>
 
 ## Malware Analysis
 
-[PyInstaller Extractor](https://github.com/extremecoders-re/pyinstxtractor) - A Python script to extract the contents of a PyInstaller generated Windows executable file. The contents of the pyz file (usually pyc files) present inside the executable are also extracted and automatically fixed so that a Python bytecode decompiler will recognize it.
+**[PyInstaller Extractor](https://github.com/extremecoders-re/pyinstxtractor)** - A Python script to extract the contents of a PyInstaller generated Windows executable file. The contents of the pyz file (usually pyc files) present inside the executable are also extracted and automatically fixed so that a Python bytecode decompiler will recognize it.
 
-[uncompyle6](https://github.com/rocky/python-uncompyle6/) - A cross-version Python bytecode decompiler. Translates Python bytecode back into equivalent Python source code.
+**[uncompyle6](https://github.com/rocky/python-uncompyle6/)** - A cross-version Python bytecode decompiler. Translates Python bytecode back into equivalent Python source code.
 
 <br>
 
 ## To-do List
+- Metasploit download+exec module
 - .py to .pdf
 - smtp exfiltration
 - ssh key integration
