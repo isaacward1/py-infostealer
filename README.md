@@ -1,6 +1,6 @@
 # Python Malware Analysis
 A guide on the build process, obfuscation techniques, and analysis of simple python-based infostealer malware.<p>
-<b>** Disclaimer ** This tutorial is intended for educational purposes only. I do not condone the malicious use of this material.</b>
+<b>** Disclaimer ** This tutorial is intended for educational purposes only. It is purely to demonstrate the ease of creation and a few capabilities of infostealer malware at a rudimenary level. I do not condone the malicious use of this material.</b>
 
 
 <br>
