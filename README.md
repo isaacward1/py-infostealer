@@ -60,7 +60,7 @@ In this example script, the arguments passed to the 'client.connect()' function 
     client.connect(c, 22, a, b, timeout=4)
     ...
 
-Pasting the original text into [Cyberchef](https://gchq.github.io/CyberChef/) and applying the following operations yields the illegible string 'yoyo': 
+Pasting the original text into [Cyberchef](https://gchq.github.io/CyberChef/) and applying the following operations yields the legible string 'yoyo': 
 - To Hex, No delimiter
 - Escape Unicode Chars, Padding: 4, Encode all chars
 
