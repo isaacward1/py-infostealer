@@ -92,7 +92,7 @@ Pasting the original text into [Cyberchef](https://gchq.github.io/CyberChef/) an
 - To Hex, No delimiter
 - Escape Unicode Chars, Padding: 4, Encode all chars
 
-However, it should be noted that this is a very crude technique as encoded characters are immediately recognizable to skilled forensic analysts and can be easily undone with several decoding tools. That said, when used in tandem with other obfuscation techniques, encoding can slightly delay reverse engineering efforts.
+However, it should be noted that this is a very crude technique as encoded characters are immediately recognizable to skilled forensic analysts and can be easily undone with several decoding tools. That said, when used in conjunction with other obfuscation techniques, encoding can slightly delay reverse engineering efforts.
 
 <br>
 
