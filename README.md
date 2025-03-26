@@ -37,6 +37,11 @@ The example script shown only uses SFTP via the paramiko library to exfiltrate s
 
 <br>
 
+### Email
+...
+
+<br>
+
 ### Other Methods ([PyExfil](https://github.com/ytisf/PyExfil))
 ...
 
