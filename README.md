@@ -105,7 +105,8 @@ To apply basic code obfuscation:
 ## Using [Pyinstaller](https://pyinstaller.org/en/stable/usage.html)
 ### Initial building:
 > cd dist
-> pyinstaller example.py
+> pyinstaller example.py --onefile
+> 
 
 <br>
 
